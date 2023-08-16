@@ -46,6 +46,17 @@ class FeedFragment : Fragment() {
         binding.countryList.layoutManager=LinearLayoutManager(context)
         binding.countryList.adapter=countryAdapter
 
+
+        binding.refreshLayout.setOnRefreshListener {
+            binding.countryList.visibility=View.GONE
+            binding.countryError.visibility=View.GONE
+            binding.ErrorBar.visibility=View.VISIBLE
+
+            viewModel.refreshData()
+            binding.refreshLayout.isRefreshing=false
+        }
+
+
         observeLiveData()
 
     }
